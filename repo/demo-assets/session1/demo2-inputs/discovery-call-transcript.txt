@@ -1,0 +1,24 @@
+Discovery call - Bulk Invoice Approval feature
+Attendees: Priya (Finance Ops Lead), Sam (Product), Meera (Engineering)
+
+Priya: Right now our approvers open every invoice one at a time. For a
+school district with 40 invoices in a batch, that's 40 clicks. We want
+to select several and approve them together.
+
+Sam: Got it. Would you want a summary before they confirm, or just
+approve immediately?
+
+Priya: Definitely a summary first - total amount, number of invoices,
+which customers. Then confirm.
+
+Meera: Can someone override one invoice in the batch, like exclude it
+or approve a different amount?
+
+Priya: Yes, we need a per-item override. Sometimes one invoice in the
+batch needs a partial approval, not full.
+
+Sam: What's the approval threshold where we'd want a second approver?
+Priya: Anything over $500 should need two people to sign off.
+
+Meera: Do we need an audit trail?
+Priya: Yes - who approved what, and when, for every item.

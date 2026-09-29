@@ -1,0 +1,35 @@
+From: Sam (Product)
+To: Priya (Finance Ops), Meera (Eng)
+Subject: RE: Bulk approval - scope for v1
+
+Following up on the call. A few things to nail down before I write
+stories:
+
+1. Two-person sign-off: finance leadership actually wants this at
+   $1,000, not $500 - they raised it in yesterday's budget review.
+   Flagging since it's different from what we said on the call.
+
+2. Notifications: do approvers get an email when a batch is ready for
+   their review? I think yes, but haven't confirmed with the infra
+   team about email sending limits.
+
+3. Can we scope partial approval (per-item override) to phase 2? It
+   adds real complexity and I'd rather ship bulk approve + audit trail
+   first.
+
+- Sam
+
+---
+
+From: Priya (Finance Ops)
+To: Sam, Meera
+
+Re: point 3 - no, partial approval has to be in v1. We already have
+two districts asking for it and I don't want to have this
+conversation twice with them.
+
+Re: point 1 - I'll confirm the threshold with finance leadership and
+get back to you. It might genuinely be $1,000 now, our volume changed
+since we set $500 last year.
+
+- Priya

@@ -1,0 +1,75 @@
+# Session 3 - Demo 18 target ("CI pipeline optimization").
+#
+# This pipeline is deliberately slow and fully serial: every stage waits
+# for the previous one, nothing is cached, and unit tests + integration
+# tests run as one combined step. See demo-assets/session3/demo18-pipeline/
+# timings.csv for the "last 10 runs" data to feed the agent.
+#
+# Security gates (security-scan, secret-scan) must stay in the pipeline
+# after optimization - that's the constraint to give the agent.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet restore backend/InvoiceApp.sln || dotnet restore backend
+
+  build:
+    needs: restore
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet build backend --configuration Release
+
+  unit-and-integration-tests:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet test backend --configuration Release
+
+  lint:
+    needs: unit-and-integration-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "Deliberately failing lint gate for Session 3, Demo 20 - remove 'exit 1' to fix"
+      - run: exit 1
+
+  security-scan:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "placeholder for SAST tool (e.g. Semgrep, SonarQube)"
+
+  secret-scan:
+    needs: security-scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "placeholder for secret scanning (e.g. gitleaks, truffleHog)"
+
+  e2e:
+    needs: secret-scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "placeholder for Playwright e2e run against a deployed preview"

@@ -1,0 +1,15 @@
+{
+  "alert": "api-p95-latency-high",
+  "severity": "critical",
+  "service": "invoice-app-api",
+  "environment": "production",
+  "metric": "p95_latency_ms",
+  "threshold_ms": 2000,
+  "observed_ms": 30500,
+  "triggered_at": "2026-10-14T14:05:30Z",
+  "duration_minutes": 5,
+  "recent_deploys": [
+    { "version": "2.8.1", "deployed_at": "2026-10-14T14:04:10Z" }
+  ],
+  "note": "Mock alert payload for Session 3, Demo 19. Feed this alongside app-logs.txt and deploy-diff.patch from demo17-rca/, plus runbook-high-latency.md, so the agent has everything it needs without touching a real monitoring system."
+}

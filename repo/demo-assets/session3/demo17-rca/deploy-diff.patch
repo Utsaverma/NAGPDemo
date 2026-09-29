@@ -1,0 +1,35 @@
+# Deploy diff for release 2.8.1 (Session 3, Demo 17)
+# The root cause is in here: the DB connection timeout and pool size
+# were both cut in the same release that shipped a new feature,
+# and nobody connected the two.
+
+--- a/backend/src/InvoiceApp.Api/appsettings.json (release 2.8.0)
++++ b/backend/src/InvoiceApp.Api/appsettings.json (release 2.8.1)
+@@ -1,7 +1,7 @@
+ {
+   "Database": {
+-    "CommandTimeoutSeconds": 30,
+-    "MaxPoolSize": 100
++    "CommandTimeoutSeconds": 5,
++    "MaxPoolSize": 20
+   },
+   "Logging": { ... }
+ }
+
+--- a/backend/src/InvoiceApp.Api/Controllers/InvoicesController.cs (release 2.8.0)
++++ b/backend/src/InvoiceApp.Api/Controllers/InvoicesController.cs (release 2.8.1)
+@@ -10,6 +10,16 @@
+     [HttpGet]
+     public ActionResult<IReadOnlyList<Invoice>> GetAll() => Ok(_repository.GetAll());
+
++    // New in 2.8.1: per-customer invoice history for the finance
++    // dashboard. Opens its own DB connection per call and does not
++    // reuse the shared pool efficiently under load.
++    [HttpGet("history/{customerName}")]
++    public ActionResult<IReadOnlyList<Invoice>> GetHistory(string customerName)
++    {
++        return Ok(_repository.GetAll().Where(i => i.CustomerName == customerName).ToList());
++    }
++
+     [HttpGet("{id}")]
+     public ActionResult<Invoice> GetById(string id)

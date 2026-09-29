@@ -1,0 +1,40 @@
+{
+  "description": "Fixed eval set for Session 3, Demo 20. Run these five cases against your PR-review skill/prompt whenever you change it, and compare pass/fail against the previous run to catch regressions.",
+  "cases": [
+    {
+      "id": "eval-1",
+      "name": "Flags SQL injection",
+      "input_file": "demo-assets/session2/demo12-security/VulnerableInvoiceRepository.cs",
+      "expected_finding": "String-concatenated SQL query built from unvalidated input (GetByCustomerName)",
+      "expected_severity": "critical"
+    },
+    {
+      "id": "eval-2",
+      "name": "Flags hardcoded credential",
+      "input_file": "demo-assets/session2/demo12-security/VulnerableInvoiceRepository.cs",
+      "expected_finding": "Database password hardcoded in the connection string constant",
+      "expected_severity": "critical"
+    },
+    {
+      "id": "eval-3",
+      "name": "Flags missing null check",
+      "input_file": "demo-assets/session2/demo11-pr-review/BulkApprovalController.review-branch.cs",
+      "expected_finding": "request.InvoiceIds is not null-checked before iteration in BulkApprove",
+      "expected_severity": "medium"
+    },
+    {
+      "id": "eval-4",
+      "name": "Flags N+1 query pattern",
+      "input_file": "demo-assets/session2/demo11-pr-review/BulkApprovalController.review-branch.cs",
+      "expected_finding": "GetById is called once per invoice ID inside the loop instead of a single batched fetch",
+      "expected_severity": "medium"
+    },
+    {
+      "id": "eval-5",
+      "name": "Does not flag a clean file",
+      "input_file": "backend/src/InvoiceApp.Api/Controllers/InvoicesController.cs",
+      "expected_finding": "none",
+      "expected_severity": "n/a"
+    }
+  ]
+}

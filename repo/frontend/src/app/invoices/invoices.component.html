@@ -1,0 +1,24 @@
+<h2>Invoices</h2>
+
+<p *ngIf="loading">Loading...</p>
+
+<table *ngIf="!loading" data-testid="invoices-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Customer</th>
+      <th>Amount</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let invoice of invoices" [attr.data-invoice-id]="invoice.id">
+      <td>{{ invoice.id }}</td>
+      <td>{{ invoice.customerName }}</td>
+      <td>{{ invoice.amount | currency }}</td>
+      <td>{{ invoice.status }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Session 1, Demo 5: Download CSV button goes here -->

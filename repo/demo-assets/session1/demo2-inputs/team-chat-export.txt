@@ -1,0 +1,23 @@
+#invoice-approval-v1
+
+Meera: quick q - for phase 1, are we sending email notifications when a
+batch is ready for approval, or is that out of scope?
+
+Sam: out of scope for v1, we don't have the infra team's sign-off on
+send limits yet. In-app notification only for now.
+
+Meera: ok noted, I'll build the API without a notification hook then,
+just a flag we can wire up later.
+
+Priya: confirmed with finance leadership - the two-person sign-off
+threshold is $1,000, not $500. Please use that number everywhere.
+
+Sam: 👍 updating the doc
+
+Meera: one more thing - does "per-item override" mean changing the
+approved amount, or just excluding an item from the batch? Those are
+different amounts of work.
+
+Priya: both, honestly. Being able to exclude is the minimum; changing
+the amount (true partial approval) is what two of our districts
+specifically asked for.

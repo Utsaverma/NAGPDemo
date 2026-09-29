@@ -1,0 +1,9 @@
+<h2>Pending Approvals</h2>
+
+<div *ngFor="let invoice of pending" data-testid="approval-row" [attr.data-invoice-id]="invoice.id">
+  <span>{{ invoice.customerName }} - {{ invoice.amount | currency }}</span>
+  <button (click)="approve(invoice.id)" data-testid="approve-btn">Approve</button>
+  <button (click)="reject(invoice.id)" data-testid="reject-btn">Reject</button>
+</div>
+
+<p *ngIf="pending.length === 0">Nothing pending.</p>

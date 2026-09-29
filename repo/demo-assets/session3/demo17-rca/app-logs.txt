@@ -1,0 +1,16 @@
+2026-10-14T14:00:12Z INFO  api  Request POST /api/approvals/INV-2291/approve 201 42ms
+2026-10-14T14:00:47Z INFO  api  Request POST /api/approvals/INV-2292/approve 201 38ms
+2026-10-14T14:03:59Z INFO  deploy  Release 2.8.1 rolling out to api-prod (3/3 pods)
+2026-10-14T14:04:10Z INFO  deploy  Release 2.8.1 rollout complete
+2026-10-14T14:04:41Z INFO  api  Request POST /api/approvals/INV-2293/approve 201 51ms
+2026-10-14T14:05:03Z ERROR api  Request POST /api/approvals/INV-2294/approve 504 30011ms  System.TimeoutException: The operation has timed out.
+2026-10-14T14:05:09Z ERROR api  Request GET /api/invoices 504 30004ms  System.TimeoutException: The operation has timed out.
+2026-10-14T14:05:14Z ERROR api  Request POST /api/approvals/INV-2295/reject 504 30012ms  System.TimeoutException: The operation has timed out.
+2026-10-14T14:05:22Z ERROR api  Request GET /api/invoices/INV-2296 504 30009ms  System.TimeoutException: The operation has timed out.
+2026-10-14T14:05:30Z WARN  api  Connection pool exhausted: 100/100 connections in use, 47 waiting
+2026-10-14T14:05:41Z ERROR api  Request POST /api/approvals/INV-2297/approve 504 30015ms  System.TimeoutException: The operation has timed out.
+2026-10-14T14:05:58Z WARN  api  Connection pool exhausted: 100/100 connections in use, 61 waiting
+2026-10-14T14:06:15Z ERROR api  Request GET /api/invoices 504 30002ms  System.TimeoutException: The operation has timed out.
+2026-10-14T14:06:33Z ERROR api  Request POST /api/approvals/INV-2298/approve 504 30008ms  System.TimeoutException: The operation has timed out.
+2026-10-14T14:07:02Z WARN  api  Connection pool exhausted: 100/100 connections in use, 58 waiting
+2026-10-14T14:07:40Z ERROR api  Request GET /api/invoices/INV-2299 504 30011ms  System.TimeoutException: The operation has timed out.
