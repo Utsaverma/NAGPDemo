@@ -63,8 +63,9 @@ class OrderTotalCalculator:
     def calculate_total(self, order: Order) -> Decimal:
         total = Decimal("0")
         for item in order.items:
-            line_total = item.line_total
-            if order.coupon_code == "SAVE10":
-                line_total -= total * Decimal("0.10")
-            total += line_total
+            total += item.line_total
+
+        if order.coupon_code == "SAVE10":
+            total -= total * Decimal("0.10")
+
         return total
