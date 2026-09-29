@@ -1,7 +1,7 @@
 # Security review demo (Session 2, Demo 12)
 
-`VulnerableInvoiceRepository.cs` is intentionally insecure. It is NOT
-referenced anywhere in `Program.cs` or wired into dependency injection -
+`vulnerable_invoice_repository.py` is intentionally insecure. It is NOT
+referenced anywhere in `backend/app/main.py` or wired into FastAPI dependencies -
 it exists only as a diff to review live. Do not register it as a
 service, and do not deploy this repo's `demo-assets/` folder anywhere
 that runs the API.

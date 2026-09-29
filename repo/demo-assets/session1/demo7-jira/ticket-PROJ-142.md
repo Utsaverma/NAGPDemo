@@ -22,6 +22,6 @@ than once.
 - No regression to orders without a coupon code
 
 This maps directly to the bug in
-`backend/src/InvoiceApp.Domain/OrderTotalCalculator.cs` used in Session
+`backend/app/services.py` (`OrderTotalCalculator`) used in Session
 1, Demo 1 - Demo 7 reuses the same bug so the subagent + MCP demo can
 reference a real ticket while a reviewer subagent checks the fix.

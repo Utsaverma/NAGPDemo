@@ -8,13 +8,13 @@ diff against.
 
 - An invoice has one of these statuses: Draft, PendingApproval,
   Approved, Rejected.
-- `ApprovalService.Approve(invoiceId, approvedBy)` sets the invoice to
+- `ApprovalService.approve(invoice_id, approved_by)` sets the invoice to
   Approved for its full amount. There is no partial state.
-- `ApprovalService.Reject(invoiceId, approvedBy, reason)` sets the
+- `ApprovalService.reject(invoice_id, approved_by, reason)` sets the
   invoice to Rejected with a reason.
 - Approval is one invoice at a time. There is no bulk operation (that's
   Demo 8, via Spec Kit, on a separate code path).
-- `InvoiceStatus.PartiallyApproved` already exists in the enum as a
+- `InvoiceStatus.PARTIALLY_APPROVED` already exists in the enum as a
   placeholder but nothing sets or reads it yet.
 
 ## The change to propose in the demo

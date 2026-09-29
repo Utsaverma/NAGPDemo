@@ -3,33 +3,27 @@
 # were both cut in the same release that shipped a new feature,
 # and nobody connected the two.
 
---- a/backend/src/InvoiceApp.Api/appsettings.json (release 2.8.0)
-+++ b/backend/src/InvoiceApp.Api/appsettings.json (release 2.8.1)
-@@ -1,7 +1,7 @@
- {
-   "Database": {
--    "CommandTimeoutSeconds": 30,
--    "MaxPoolSize": 100
-+    "CommandTimeoutSeconds": 5,
-+    "MaxPoolSize": 20
-   },
-   "Logging": { ... }
- }
+--- a/backend/app/config.py (release 2.8.0)
++++ b/backend/app/config.py (release 2.8.1)
+@@ -1,4 +1,4 @@
+-DATABASE_COMMAND_TIMEOUT_SECONDS = 30
+-DATABASE_MAX_POOL_SIZE = 100
++DATABASE_COMMAND_TIMEOUT_SECONDS = 5
++DATABASE_MAX_POOL_SIZE = 20
 
---- a/backend/src/InvoiceApp.Api/Controllers/InvoicesController.cs (release 2.8.0)
-+++ b/backend/src/InvoiceApp.Api/Controllers/InvoicesController.cs (release 2.8.1)
+--- a/backend/app/routers/invoices.py (release 2.8.0)
++++ b/backend/app/routers/invoices.py (release 2.8.1)
 @@ -10,6 +10,16 @@
-     [HttpGet]
-     public ActionResult<IReadOnlyList<Invoice>> GetAll() => Ok(_repository.GetAll());
+    @router.get("", response_model=list[Invoice])
+    def get_all() -> list[Invoice]:
+        return repository.get_all()
 
-+    // New in 2.8.1: per-customer invoice history for the finance
-+    // dashboard. Opens its own DB connection per call and does not
-+    // reuse the shared pool efficiently under load.
-+    [HttpGet("history/{customerName}")]
-+    public ActionResult<IReadOnlyList<Invoice>> GetHistory(string customerName)
-+    {
-+        return Ok(_repository.GetAll().Where(i => i.CustomerName == customerName).ToList());
-+    }
++    # New in 2.8.1: per-customer invoice history for the finance
++    # dashboard. Opens its own DB connection per call and does not
++    # reuse the shared pool efficiently under load.
++    @router.get("/history/{customer_name}", response_model=list[Invoice])
++    def get_history(customer_name: str) -> list[Invoice]:
++        return [invoice for invoice in repository.get_all() if invoice.customer_name == customer_name]
 +
-     [HttpGet("{id}")]
-     public ActionResult<Invoice> GetById(string id)
+     @router.get("/{invoice_id}", response_model=Invoice)
+     def get_by_id(invoice_id: str) -> Invoice:

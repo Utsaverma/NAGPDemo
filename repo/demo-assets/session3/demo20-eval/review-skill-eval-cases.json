@@ -4,35 +4,35 @@
     {
       "id": "eval-1",
       "name": "Flags SQL injection",
-      "input_file": "demo-assets/session2/demo12-security/VulnerableInvoiceRepository.cs",
-      "expected_finding": "String-concatenated SQL query built from unvalidated input (GetByCustomerName)",
+      "input_file": "demo-assets/session2/demo12-security/vulnerable_invoice_repository.py",
+      "expected_finding": "String-interpolated SQL query built from unvalidated input (get_by_customer_name)",
       "expected_severity": "critical"
     },
     {
       "id": "eval-2",
       "name": "Flags hardcoded credential",
-      "input_file": "demo-assets/session2/demo12-security/VulnerableInvoiceRepository.cs",
+      "input_file": "demo-assets/session2/demo12-security/vulnerable_invoice_repository.py",
       "expected_finding": "Database password hardcoded in the connection string constant",
       "expected_severity": "critical"
     },
     {
       "id": "eval-3",
       "name": "Flags missing null check",
-      "input_file": "demo-assets/session2/demo11-pr-review/BulkApprovalController.review-branch.cs",
-      "expected_finding": "request.InvoiceIds is not null-checked before iteration in BulkApprove",
+      "input_file": "demo-assets/session2/demo11-pr-review/bulk_approval_router.review_branch.py",
+      "expected_finding": "request.invoice_ids is not null-checked before iteration in bulk_approve",
       "expected_severity": "medium"
     },
     {
       "id": "eval-4",
       "name": "Flags N+1 query pattern",
-      "input_file": "demo-assets/session2/demo11-pr-review/BulkApprovalController.review-branch.cs",
-      "expected_finding": "GetById is called once per invoice ID inside the loop instead of a single batched fetch",
+      "input_file": "demo-assets/session2/demo11-pr-review/bulk_approval_router.review_branch.py",
+      "expected_finding": "get_by_id is called once per invoice ID inside the loop instead of a single batched fetch",
       "expected_severity": "medium"
     },
     {
       "id": "eval-5",
       "name": "Does not flag a clean file",
-      "input_file": "backend/src/InvoiceApp.Api/Controllers/InvoicesController.cs",
+      "input_file": "backend/app/routers/invoices.py",
       "expected_finding": "none",
       "expected_severity": "n/a"
     }

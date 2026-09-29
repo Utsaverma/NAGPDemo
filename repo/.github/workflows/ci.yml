@@ -20,30 +20,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/setup-python@v5
         with:
-          dotnet-version: '8.0.x'
-      - run: dotnet restore backend/InvoiceApp.sln || dotnet restore backend
+          python-version: '3.12'
+      - run: pip install -r backend/requirements.txt
 
   build:
     needs: restore
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/setup-python@v5
         with:
-          dotnet-version: '8.0.x'
-      - run: dotnet build backend --configuration Release
+          python-version: '3.12'
+      - run: python -m compileall -q backend/app
 
   unit-and-integration-tests:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/setup-python@v5
         with:
-          dotnet-version: '8.0.x'
-      - run: dotnet test backend --configuration Release
+          python-version: '3.12'
+      - run: pip install -r backend/requirements.txt
+      - run: cd backend && pytest
 
   lint:
     needs: unit-and-integration-tests

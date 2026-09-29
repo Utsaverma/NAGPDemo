@@ -1,6 +1,6 @@
 # Staging this as a pull request (Session 2, Demo 11)
 
-`BulkApprovalController.review-branch.cs` is a working draft of the bulk
+`bulk_approval_router.review_branch.py` is a working draft of the bulk
 approve endpoint (the feature built live in Demo 8) with five issues
 planted on purpose, so the automated review has real findings instead
 of a clean diff.
@@ -9,9 +9,9 @@ of a clean diff.
 
 1. Create a branch, e.g. `git checkout -b demo/bulk-approval-review`.
 2. Copy this file's contents into
-   `backend/src/InvoiceApp.Api/Controllers/BulkApprovalController.cs`
+   `backend/app/routers/bulk_approvals.py`
    (a new file - it doesn't replace anything).
-3. Add a bare-bones `BulkApprove` method to `ApprovalService` if you
+3. Add a bare-bones `bulk_approve` method to `ApprovalService` if you
    want it to compile (not required for the review demo itself, which
    only reads the diff).
 4. Commit and open the PR. Ask the agent to review it against your
@@ -29,7 +29,7 @@ of a clean diff.
    same invoice ID can both read `PendingApproval` before either writes
    `Approved`, so both "succeed" and the audit trail double-counts one
    approval.
-4. **Missing test** - no test file accompanies this controller at all.
+4. **Missing test** - no test file accompanies this router at all.
 5. **Unclear naming** - the boolean parameter `flag` on `ProcessOne`
    doesn't say what it controls (it toggles whether a rejection reason
    is required).

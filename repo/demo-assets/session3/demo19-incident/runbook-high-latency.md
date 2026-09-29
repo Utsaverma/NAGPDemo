@@ -12,7 +12,7 @@ for 5 consecutive minutes.
 - Note the pool's configured max size and current in-use/waiting counts.
 
 ## Step 3 - Check recent config changes
-- Diff the last deploy's `appsettings.json` against the previous
+- Diff the last deploy's application configuration against the previous
   release for `Database.CommandTimeoutSeconds` and
   `Database.MaxPoolSize` specifically - these have caused this alert
   before.

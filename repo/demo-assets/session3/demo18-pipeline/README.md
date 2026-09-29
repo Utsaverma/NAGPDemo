@@ -11,7 +11,7 @@ What a good answer should surface, roughly in order of impact:
 - Every stage runs serially via `needs:`, even ones with no real
   dependency on each other (e.g. `lint` doesn't need to wait for tests
   to finish).
-- No caching for NuGet restore, so `restore` pays the same cost every
+- No caching for Python dependency installation, so `restore` pays the same cost every
   run.
 - `e2e` is the slowest single stage (~220s) and currently blocks on
   every gate before it, including the two security stages.
